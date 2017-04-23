@@ -1,7 +1,7 @@
 #include "AppClass.h"
 void AppClass::InitWindow(String a_sWindowName)
 {
-	super::InitWindow("Paradox Billiards");
+	super::InitWindow("Bounding Spheres DEMO");
 }
 
 void AppClass::InitVariables(void)
@@ -68,9 +68,8 @@ void AppClass::Update(void)
 	m_pMeshMngr->PrintLine("");//Add a line on top
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
 
-	m_pMeshMngr->Print("I,O,P: rotate tables");
-	m_pMeshMngr->Print("\nW, A, S, D, Q, E: move camera");
-	m_pMeshMngr->Print("\nRight mouse button: Aim camera");
+	m_pMeshMngr->Print("FPS:");
+	m_pMeshMngr->Print(std::to_string(nFPS), RERED);
 }
 
 void AppClass::Display(void)
