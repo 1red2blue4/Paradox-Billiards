@@ -99,10 +99,7 @@ void AppClass::Update(void)
 
 	m_ball1Phys->AddForce(m_ball1Phys->GetGravity());
 
-	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table1")) ||
-		m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table2")) ||
-		m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table3")) ||
-		m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table4")))
+	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table1")))
 	{
 		//m_ball1Phys->ZeroVelocity();
 		//m_ball1Phys->SetForce(vector3());
@@ -131,8 +128,104 @@ void AppClass::Update(void)
 
 		std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
 
-		m_ball1Phys->AddForce(normalizedNormal*0.04f);
+		m_ball1Phys->AddForce(normalizedNormal*0.05f);
 		
+	}
+	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table2")))
+	{
+		//m_ball1Phys->ZeroVelocity();
+		//m_ball1Phys->SetForce(vector3());
+		float speed = m_ball1Phys->GetVelocity().y;
+		m_ball1Phys->SetForce(vector3());
+		m_ball1Phys->SetVelocity(vector3());
+
+		vector3 table1Max = m_pBOMngr->GetBoundingObject("table2")->GetMaxG();
+		vector3 table1Min = m_pBOMngr->GetBoundingObject("table2")->GetMinG();
+		matrix4 table1Mat = m_pBOMngr->GetBoundingObject("table2")->GetModelMatrix();
+
+		vector3 localUpperRightForward = vector3(table1Max.x, table1Max.y, table1Min.z);
+		vector3 localUpperRightBack = vector3(table1Max.x, table1Max.y, table1Max.z);
+		vector3 localUpperLeftForward = vector3(table1Min.x, table1Max.y, table1Min.z);
+
+		vector3 globalUpperRightForward = vector3(table1Mat * vector4(localUpperRightForward, 1.0f));
+		vector3 globalUpperRightBack = vector3(table1Mat * vector4(localUpperRightBack, 1.0f));
+		vector3 globalUpperLeftForward = vector3(table1Mat * vector4(localUpperLeftForward, 1.0f));
+
+		vector3 normal = m_pBOMngr->GetBoundingObject("table2")->GetNormalToPlane(globalUpperRightForward, globalUpperRightBack, globalUpperLeftForward);
+
+		float sizeNormal = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
+
+
+		vector3 normalizedNormal = normal / sizeNormal;
+
+		//std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
+
+		m_ball1Phys->AddForce(normalizedNormal*0.05f);
+
+	}
+	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table3")))
+	{
+		//m_ball1Phys->ZeroVelocity();
+		//m_ball1Phys->SetForce(vector3());
+		float speed = m_ball1Phys->GetVelocity().y;
+		m_ball1Phys->SetForce(vector3());
+		m_ball1Phys->SetVelocity(vector3());
+
+		matrix4 table1Mat = m_pBOMngr->GetBoundingObject("table3")->GetModelMatrix();
+		vector3 table1Max = m_pBOMngr->GetBoundingObject("table3")->GetMaxG();
+		vector3 table1Min = m_pBOMngr->GetBoundingObject("table3")->GetMinG();
+
+		vector3 localUpperRightForward = vector3(table1Max.x, table1Max.y, table1Min.z);
+		vector3 localUpperRightBack = vector3(table1Max.x, table1Max.y, table1Max.z);
+		vector3 localUpperLeftForward = vector3(table1Min.x, table1Max.y, table1Min.z);
+
+		vector3 globalUpperRightForward = vector3(table1Mat * vector4(localUpperRightForward, 1.0f));
+		vector3 globalUpperRightBack = vector3(table1Mat * vector4(localUpperRightBack, 1.0f));
+		vector3 globalUpperLeftForward = vector3(table1Mat * vector4(localUpperLeftForward, 1.0f));
+
+		vector3 normal = m_pBOMngr->GetBoundingObject("table3")->GetNormalToPlane(globalUpperRightForward, globalUpperRightBack, globalUpperLeftForward);
+
+		float sizeNormal = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
+
+
+		vector3 normalizedNormal = normal / sizeNormal;
+
+		//std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
+
+		m_ball1Phys->AddForce(normalizedNormal*0.05f);
+
+	}
+	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table4")))
+	{
+		//m_ball1Phys->ZeroVelocity();
+		//m_ball1Phys->SetForce(vector3());
+		float speed = m_ball1Phys->GetVelocity().y;
+		m_ball1Phys->SetForce(vector3());
+		m_ball1Phys->SetVelocity(vector3());
+
+		matrix4 table1Mat = m_pBOMngr->GetBoundingObject("table4")->GetModelMatrix();
+		vector3 table1Max = m_pBOMngr->GetBoundingObject("table4")->GetMaxG();
+		vector3 table1Min = m_pBOMngr->GetBoundingObject("table4")->GetMinG();
+
+		vector3 localUpperRightForward = vector3(table1Max.x, table1Max.y, table1Min.z);
+		vector3 localUpperRightBack = vector3(table1Max.x, table1Max.y, table1Max.z);
+		vector3 localUpperLeftForward = vector3(table1Min.x, table1Max.y, table1Min.z);
+
+		vector3 globalUpperRightForward = vector3(table1Mat * vector4(localUpperRightForward, 1.0f));
+		vector3 globalUpperRightBack = vector3(table1Mat * vector4(localUpperRightBack, 1.0f));
+		vector3 globalUpperLeftForward = vector3(table1Mat * vector4(localUpperLeftForward, 1.0f));
+
+		vector3 normal = m_pBOMngr->GetBoundingObject("table4")->GetNormalToPlane(globalUpperRightForward, globalUpperRightBack, globalUpperLeftForward);
+
+		float sizeNormal = sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
+
+
+		vector3 normalizedNormal = normal / sizeNormal;
+
+		//std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
+
+		m_ball1Phys->AddForce(normalizedNormal*0.05f);
+
 	}
 
 
