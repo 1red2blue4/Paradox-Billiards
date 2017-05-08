@@ -11,14 +11,27 @@ Date: 2015/09 (Last Modified on: 15/11)
 #include "MyBoundingBoxClass.h"
 #include "MyBoundingObjectClass.h"
 #include "BoundingObjectManager.h"
+#include "MyBOManager.h"
+#include "PhysicsManager.h"
 
 using namespace ReEng; //Using ReEng namespace to use all the classes in the dll
 
 class AppClass : public ReEngAppClass
 {
-	vector3 m_v3Position;
+	//vector3 m_v3Position;
 	quaternion m_sceneRotation = quaternion();
-	BoundingObjectManager* m_boMngr;
+	quaternion m_tableRotation = quaternion();
+	vector3 m_ball1Pos = vector3();
+	//BoundingObjectManager* m_boMngr;
+	bool m_backgroundOn = false;
+	int controlTimer = 0;
+	int timerTracker = 0;
+	bool m_seeControls = true;
+	bool pressTimedEvent = false;
+	MyBOManager* m_pBOMngr;
+	vector3 m_v3O1;
+	vector3 m_v3O2;
+	BallPhysics* m_ball1Phys;
 public:
 	typedef ReEngAppClass super;
 	/*

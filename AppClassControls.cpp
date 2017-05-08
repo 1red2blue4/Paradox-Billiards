@@ -3,6 +3,8 @@ void AppClass::ProcessKeyboard(void)
 {
 	bool bModifier = false;
 	float fSpeed = 0.75f;
+	float rotSpeed = 0.03f;
+	
 
 #pragma region ON_KEY_PRESS_RELEASE
 	static bool	bLastF1 = false, bLastF2 = false, bLastF3 = false, bLastF4 = false, bLastF5 = false,
@@ -42,50 +44,89 @@ void AppClass::ProcessKeyboard(void)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		m_pCameraMngr->MoveVertical(fSpeed);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		m_v3Position += vector3(-0.1f, 0.0f, 0.0f);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		m_v3Position += vector3(0.1f, 0.0f, 0.0f);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		if (!bModifier)
-		{
-			m_v3Position += vector3(0.0f, 0.1f, 0.0f);
-		}
-		else
-		{
-			m_v3Position += vector3(0.0f, 0.0f,-0.1f);
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		if (!bModifier)
-		{
-			m_v3Position += vector3(0.0f, -0.1f, 0.0f);
-		}
-		else
-		{
-			m_v3Position += vector3(0.0f, 0.0f, 0.1f);
-		}
-	}
-
+	//rotate the scene
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
 	{
-		m_sceneRotation = m_sceneRotation * quaternion(vector3(0.03f, 0.0f, 0.0f));
+		m_sceneRotation = m_sceneRotation * quaternion(vector3(rotSpeed, 0.0f, 0.0f));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+		{
+			m_sceneRotation = m_sceneRotation * quaternion(vector3(-2.0f*rotSpeed, 0.0f, 0.0f));
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{
-		m_sceneRotation = m_sceneRotation * quaternion(vector3(0.0f, 0.03f, 0.0f));
+		m_sceneRotation = m_sceneRotation * quaternion(vector3(0.0f, rotSpeed, 0.0f));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+		{
+			m_sceneRotation = m_sceneRotation * quaternion(vector3(0.0f, -2.0f*rotSpeed, 0.0f));
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
-		m_sceneRotation = m_sceneRotation * quaternion(vector3(0.0f, 0.0f, 0.03f));
+		m_sceneRotation = m_sceneRotation * quaternion(vector3(0.0f, 0.0f, rotSpeed));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+		{
+			m_sceneRotation = m_sceneRotation * quaternion(vector3(0.0f, 0.0f, -2.0f*rotSpeed));
+		}
+	}
+
+	//rotate individual tables
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+	{
+		m_tableRotation = m_tableRotation * quaternion(vector3(rotSpeed, 0.0f, 0.0f));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+		{
+			m_tableRotation = m_tableRotation * quaternion(vector3(-2.0f*rotSpeed, 0.0f, 0.0f));
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+	{
+		m_tableRotation = m_tableRotation * quaternion(vector3(0.0f, rotSpeed, 0.0f));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+		{
+			m_tableRotation = m_tableRotation * quaternion(vector3(0.0f, -2.0f*rotSpeed, 0.0f));
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+	{
+		m_tableRotation = m_tableRotation * quaternion(vector3(0.0f, 0.0f, rotSpeed));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+		{
+			m_tableRotation = m_tableRotation * quaternion(vector3(0.0f, 0.0f, -2.0f*rotSpeed));
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::B) && pressTimedEvent == false)
+	{
+		m_backgroundOn = !m_backgroundOn;
+		pressTimedEvent = true;
+		timerTracker = controlTimer;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::T) && pressTimedEvent == false)
+	{
+		m_seeControls = !m_seeControls;
+		pressTimedEvent = true;
+		timerTracker = controlTimer;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		m_ball1Pos = vector3();
+	}
+
+	controlTimer++;
+
+	//if the time has surpassed two seconds since the timed event, you can do the timed event again
+	if (controlTimer > timerTracker + 15)
+	{
+		pressTimedEvent = false;
 	}
 	
 
