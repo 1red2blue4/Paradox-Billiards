@@ -8,6 +8,7 @@ BallPhysics::BallPhysics()
 	speedCap = 1.5f;
 	gravity = vector3();
 	freedom = 0.035;
+	name = "default";
 }
 
 BallPhysics::~BallPhysics()
@@ -43,34 +44,6 @@ void BallPhysics::AddForce(vector3 frc)
 
 vector3 BallPhysics::ApplyForces(vector3 objectPosition)
 {
-	/*
-	if (netForce.x < gravity.x)
-	{
-		netForce.x += freedom;
-	}
-	if (netForce.x > gravity.x)
-	{
-		netForce.x -= freedom;
-	}
-	if (netForce.y < gravity.y)
-	{
-		netForce.y += freedom;
-	}
-	if (netForce.y > gravity.y)
-	{
-		netForce.y -= freedom;
-	}
-	if (netForce.z < gravity.z)
-	{
-		netForce.z += freedom;
-	}
-	if (netForce.z > gravity.z)
-	{
-		netForce.z -= freedom;
-	}
-	*/
-
-	//netForce = gravity + bounceForce;
 
 	velocity += netForce;
 	if (velocity.x*velocity.x + velocity.y*velocity.y + velocity.z*velocity.z > speedCap*speedCap)
@@ -107,3 +80,8 @@ void BallPhysics::SetForce(vector3 frc)
 {
 	netForce = frc;
 }
+
+void BallPhysics::SetName(String nm) { name = nm; }
+String BallPhysics::GetName() { return name; }
+void BallPhysics::SetType(String typ) { type = typ; }
+String BallPhysics::GetType() { return type; }

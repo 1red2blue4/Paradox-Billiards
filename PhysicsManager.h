@@ -13,14 +13,23 @@ private:
 	PhysicsManager(PhysicsManager const& other);
 	PhysicsManager& operator=(PhysicsManager const& other);
 
+	~PhysicsManager();
+
 public:
 	static PhysicsManager* GetInstance(void);
 	static void ReleaseInstance(void);
 
-	/*
 	//make a new physics object
-	static void MakePhysicsObject(matrix4 obj);
+	static void MakePhysicsObject(String name);
+	static void RemovePhysicsObject(String name);
+	static BallPhysics* GetPhysObject(String name);
+	static BallPhysics* GetPhysObject(int index);
+	static String GetType(String name);
+	static String GetType(int index);
+	static void SetType(String name, String typ);
+	static void SetType(int index, String typ);
 
+	/*
 	//set all objects' gravity
 	static void SetGravityAll(float force);
 	

@@ -4,6 +4,11 @@ void MyBOClass::Init(void)
 {
 	m_m4ToWorld = IDENTITY_M4;
 
+	isTable = false;
+	isBall = false;
+
+	m_v3Color = vector3();
+
 	m_v3Center = vector3(0.0f);
 	m_v3Min = vector3(0.0f);
 	m_v3Max = vector3(0.0f);
@@ -24,6 +29,22 @@ vector3 MyBOClass::GetNormalToPlane(vector3 p, vector3 q, vector3 r)
 	vector3 v1 = p - q;
 	vector3 v2 = r - q;
 	return glm::cross(v1, v2);
+}
+void MyBOClass::SetBall(bool is)
+{
+	isBall = is;
+}
+bool MyBOClass::IsBall()
+{
+	return isBall;
+}
+void MyBOClass::SetTable(bool is)
+{
+	isTable = is;
+}
+bool MyBOClass::IsTable()
+{
+	return isTable;
 }
 void MyBOClass::Swap(MyBOClass& other)
 {
@@ -609,3 +630,6 @@ bool MyBOClass::IsColliding(MyBOClass* const a_pOther)
 
 	return SAT(a_pOther);
 }
+
+void MyBOClass::SetColor(vector3 color) { m_v3Color = color; }
+vector3 MyBOClass::GetColor() { return m_v3Color; }

@@ -1,5 +1,7 @@
 #include "PhysicsManager.h"
 
+PhysicsManager* PhysicsManager::pMngr = nullptr;
+
 PhysicsManager::PhysicsManager()
 {
 	numPhysicObjs = 0;
@@ -34,20 +36,103 @@ PhysicsManager* PhysicsManager::GetInstance(void)
 
 void PhysicsManager::ReleaseInstance(void)
 {
-	if (pMngr != nullptr)
+	for (int i = 0; i < pMngr->numPhysicObjs; i++)
 	{
-		delete pMngr;
-		pMngr = nullptr;
+		if (pMngr->physicsObjects[i] != nullptr)
+		{
+			delete pMngr->physicsObjects[i];
+			pMngr->physicsObjects[i] = nullptr;
+		}
+	}
+	pMngr->physicsObjects.clear();
+}
+
+//make a new physics object
+void PhysicsManager::MakePhysicsObject(String name)
+{
+	BallPhysics* ball = new BallPhysics();
+	if (ball != nullptr)
+	{
+		pMngr->physicsObjects.push_back(ball);
+		pMngr->physicsObjects[pMngr->numPhysicObjs]->SetName(name);
+	}
+	pMngr->numPhysicObjs = pMngr->physicsObjects.size();
+}
+
+BallPhysics* PhysicsManager::GetPhysObject(String name)
+{
+	for (int i = 0; i < pMngr->numPhysicObjs; i++)
+	{
+		if (pMngr->physicsObjects[i]->GetName() == name && pMngr->physicsObjects[i] != nullptr)
+		{
+			return pMngr->physicsObjects[i];
+		}
+	}
+
+	std::cout << "Could not find physics object named " << name << std::endl;
+
+	return nullptr;
+}
+
+BallPhysics* PhysicsManager::GetPhysObject(int index)
+{
+	if (pMngr->physicsObjects[index] != nullptr)
+	{
+		return pMngr->physicsObjects[index];
+	}
+
+	std::cout << "Could not find physics object at index " << index << std::endl;
+
+	return nullptr;
+}
+
+String PhysicsManager::GetType(String name)
+{
+	for (int i = 0; i < pMngr->numPhysicObjs; i++)
+	{
+		if (pMngr->physicsObjects[i]->GetName() == name && pMngr->physicsObjects[i] != nullptr)
+		{
+			return pMngr->physicsObjects[i]->GetType();
+		}
+	}
+
+	std::cout << "Could not find physics object named " << name << std::endl;
+
+	return nullptr;
+}
+
+String PhysicsManager::GetType(int index)
+{
+	if (pMngr->physicsObjects[index] != nullptr)
+	{
+		return pMngr->physicsObjects[index]->GetType();
+	}
+
+	std::cout << "Could not find physics object at index " << index << std::endl;
+
+	return nullptr;
+}
+
+void PhysicsManager::SetType(String name, String typ)
+{
+	for (int i = 0; i < pMngr->numPhysicObjs; i++)
+	{
+		if (pMngr->physicsObjects[i]->GetName() == name && pMngr->physicsObjects[i] != nullptr)
+		{
+			pMngr->physicsObjects[i]->SetType(typ);
+		}
+	}
+
+}
+void PhysicsManager::SetType(int index, String typ)
+{
+	if (pMngr->physicsObjects[index] != nullptr)
+	{
+		pMngr->physicsObjects[index]->SetType(typ);
 	}
 }
 
 /*
-//make a new physics object
-void PhysicsManager::MakePhysicsObject(matrix4 obj)
-{
-
-}
-
 //set all objects' gravity
 void PhysicsManager::SetGravityAll(float force) 
 {
@@ -102,3 +187,8 @@ void PhysicsManager::ApplyAllForces(std::vector<matrix4&> allObjectMatrices)
 int PhysicsManager::GetNumObjs(void) { return pMngr->numPhysicObjs; }
 std::vector<BallPhysics*> PhysicsManager::GetAllPhysObj(void) { return pMngr->physicsObjects; }
 */
+
+PhysicsManager::~PhysicsManager()
+{
+	ReleaseInstance();
+}

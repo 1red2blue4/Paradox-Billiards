@@ -14,6 +14,11 @@ class MyBOClass
 {
 	float m_fRadius = 0.0f; //Radius of the Bounding Object
 
+	bool isTable = false;
+	bool isBall = false;
+
+	vector3 m_v3Color = vector3();
+
 	MeshManagerSingleton* m_pMeshMngr = nullptr;//Mesh Manager Singleton
 
 	vector3 m_v3Center = vector3(0.0f); //Will store the center point of the Object Class
@@ -31,6 +36,16 @@ class MyBOClass
 public:
 
 	vector3 GetNormalToPlane(vector3 p, vector3 q, vector3 r);
+
+	//set whether or not an object is a ball or table
+	void SetBall(bool is);
+	void SetTable(bool is);
+	//returns true is the object is a ball//table
+	bool IsBall();
+	bool IsTable();
+
+	void SetColor(vector3 color);
+	vector3 GetColor();
 
 	/*
 	USAGE: Constructor

@@ -105,6 +105,7 @@ xcopy "$(SolutionDir)include\RE\Shaders" "$(SolutionDir)_Binary\Shaders" /y</Com
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\IGME-309_lastICEs\ReEngineApp_2016s\A12_Octree\Octree.cpp" />
     <ClCompile Include="AppClass.cpp" />
     <ClCompile Include="AppClassControls.cpp" />
     <ClCompile Include="BallPhysics.cpp" />
@@ -115,8 +116,10 @@ xcopy "$(SolutionDir)include\RE\Shaders" "$(SolutionDir)_Binary\Shaders" /y</Com
     <ClCompile Include="MyBoundingBoxClass.cpp" />
     <ClCompile Include="MyBoundingObjectClass.cpp" />
     <ClCompile Include="MyBoundingSphereClass.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\IGME-309_lastICEs\ReEngineApp_2016s\A12_Octree\Octree.h" />
     <ClInclude Include="..\res\Resource.h" />
     <ClInclude Include="AppClass.h" />
     <ClInclude Include="BallPhysics.h" />
@@ -126,6 +129,7 @@ xcopy "$(SolutionDir)include\RE\Shaders" "$(SolutionDir)_Binary\Shaders" /y</Com
     <ClInclude Include="MyBoundingBoxClass.h" />
     <ClInclude Include="MyBoundingObjectClass.h" />
     <ClInclude Include="MyBoundingSphereClass.h" />
+    <ClInclude Include="PhysicsManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\res\BTO.rc" />

@@ -29,6 +29,7 @@ class AppClass : public ReEngAppClass
 	bool m_seeControls = true;
 	bool pressTimedEvent = false;
 	MyBOManager* m_pBOMngr;
+	bool m_shouldFall = true;
 	vector3 m_v3O1;
 	vector3 m_v3O2;
 	BallPhysics* m_ball1Phys;

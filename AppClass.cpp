@@ -37,15 +37,6 @@ void AppClass::InitVariables(void)
 	m_ball1Phys = new BallPhysics();
 	m_ball1Phys->SetGravity(vector3(0.0f, -0.05f, 0.0f));
 
-	//used for SAT test
-	//Load Models
-	//m_pMeshMngr->LoadModel("Minecraft\\Steve.obj", "Steve");
-	//m_pMeshMngr->LoadModel("Minecraft\\Creeper.obj", "Creeper");
-
-	//Initialize positions
-	//m_v3O1 = vector3(-2.5f, 0.0f, 0.0f);
-	//m_v3O2 = vector3(2.5f, 0.0f, 0.0f);
-
 	m_pBOMngr = MyBOManager::GetInstance();
 	m_pBOMngr->AddObject(m_pMeshMngr->GetVertexList("ball1"), "ball1");
 	m_pBOMngr->AddObject(m_pMeshMngr->GetVertexList("table1"), "table1");
@@ -55,6 +46,7 @@ void AppClass::InitVariables(void)
 
 	m_backgroundOn = true;
 	m_seeControls = true;
+	m_shouldFall = true;
 
 	m_ball1Pos = vector3();
 }
@@ -92,12 +84,14 @@ void AppClass::Update(void)
 	static vector3 table2Pos = vector3(0.0, stretch, 0.0); //up
 	static vector3 table1Pos = vector3(0.0, -stretch, 0.0); //down
 
+	//static float shouldFall = true;
+
 	//static vector3 ball1Pos = vector3(); //ball position
 	static vector3 ball1Force = m_ball1Phys->GetForce(); //ball force
 
 	m_ball1Phys->SetBounce(vector3());
 
-	m_ball1Phys->AddForce(m_ball1Phys->GetGravity());
+	
 
 	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table1")))
 	{
@@ -105,8 +99,11 @@ void AppClass::Update(void)
 		//m_ball1Phys->SetForce(vector3());
 		float speed = m_ball1Phys->GetVelocity().y;
 		m_ball1Phys->SetForce(vector3());
-		m_ball1Phys->SetVelocity(vector3());
-
+		if (m_shouldFall)
+		{
+			m_ball1Phys->SetVelocity(vector3());
+			m_shouldFall = false;
+		}
 		matrix4 table1Mat = m_pBOMngr->GetBoundingObject("table1")->GetModelMatrix();
 		vector3 table1Max = m_pBOMngr->GetBoundingObject("table1")->GetMaxG();
 		vector3 table1Min = m_pBOMngr->GetBoundingObject("table1")->GetMinG();
@@ -128,16 +125,20 @@ void AppClass::Update(void)
 
 		std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
 
-		m_ball1Phys->AddForce(normalizedNormal*0.05f);
+		m_ball1Phys->AddForce(normalizedNormal*0.02f);
 		
 	}
-	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table2")))
+	else if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table2")))
 	{
 		//m_ball1Phys->ZeroVelocity();
 		//m_ball1Phys->SetForce(vector3());
 		float speed = m_ball1Phys->GetVelocity().y;
 		m_ball1Phys->SetForce(vector3());
-		m_ball1Phys->SetVelocity(vector3());
+		if (m_shouldFall)
+		{
+			m_ball1Phys->SetVelocity(vector3());
+			m_shouldFall = false;
+		}
 
 		vector3 table1Max = m_pBOMngr->GetBoundingObject("table2")->GetMaxG();
 		vector3 table1Min = m_pBOMngr->GetBoundingObject("table2")->GetMinG();
@@ -160,16 +161,20 @@ void AppClass::Update(void)
 
 		//std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
 
-		m_ball1Phys->AddForce(normalizedNormal*0.05f);
+		m_ball1Phys->AddForce(normalizedNormal*0.02f);
 
 	}
-	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table3")))
+	else if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table3")))
 	{
 		//m_ball1Phys->ZeroVelocity();
 		//m_ball1Phys->SetForce(vector3());
 		float speed = m_ball1Phys->GetVelocity().y;
 		m_ball1Phys->SetForce(vector3());
-		m_ball1Phys->SetVelocity(vector3());
+		if (m_shouldFall)
+		{
+			m_ball1Phys->SetVelocity(vector3());
+			m_shouldFall = false;
+		}
 
 		matrix4 table1Mat = m_pBOMngr->GetBoundingObject("table3")->GetModelMatrix();
 		vector3 table1Max = m_pBOMngr->GetBoundingObject("table3")->GetMaxG();
@@ -192,16 +197,20 @@ void AppClass::Update(void)
 
 		//std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
 
-		m_ball1Phys->AddForce(normalizedNormal*0.05f);
+		m_ball1Phys->AddForce(normalizedNormal*0.02f);
 
 	}
-	if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table4")))
+	else if (m_pBOMngr->GetBoundingObject("ball1")->IsColliding(m_pBOMngr->GetBoundingObject("table4")))
 	{
 		//m_ball1Phys->ZeroVelocity();
 		//m_ball1Phys->SetForce(vector3());
 		float speed = m_ball1Phys->GetVelocity().y;
 		m_ball1Phys->SetForce(vector3());
-		m_ball1Phys->SetVelocity(vector3());
+		if (m_shouldFall)
+		{
+			m_ball1Phys->SetVelocity(vector3());
+			m_shouldFall = false;
+		}
 
 		matrix4 table1Mat = m_pBOMngr->GetBoundingObject("table4")->GetModelMatrix();
 		vector3 table1Max = m_pBOMngr->GetBoundingObject("table4")->GetMaxG();
@@ -224,8 +233,13 @@ void AppClass::Update(void)
 
 		//std::cout << "X: " << normal.x << "\n" << "Y: " << normal.y << "\n" << "Z: " << normal.z << "\n";
 
-		m_ball1Phys->AddForce(normalizedNormal*0.05f);
+		m_ball1Phys->AddForce(normalizedNormal*0.02f);
 
+	}
+	else
+	{
+		m_ball1Phys->AddForce(m_ball1Phys->GetGravity());
+		m_shouldFall = true;
 	}
 
 
@@ -317,4 +331,16 @@ void AppClass::Release(void)
 	SafeDelete(m_ball1Phys);
 	super::Release(); //release the memory of the inherited fields
 	MyBOManager::ReleaseInstance();
+
+	/*
+	delete myOctree;
+	for (int i = 0; i < allBO.size(); i++)
+	{
+		if (allBO[i] != nullptr)
+		{
+			allBO[i] = nullptr;
+		}
+		delete allBO[i];
+	}
+	*/
 }
