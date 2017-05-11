@@ -82,6 +82,7 @@ void MyBOManager::SetModelMatrix(matrix4 a_mModelMatrix, String a_sIndex)
 
 	m_lObject[nIndex]->SetModelMatrix(a_mModelMatrix);//set the matrix for the indexed Object
 }
+
 void MyBOManager::DisplaySphere(String a_sName, vector3 a_v3Color)
 {
 	int nIndex = GetIndex(a_sName);
@@ -252,3 +253,41 @@ int MyBOManager::GetIndex(String a_sIndex)
 		return -1;
 	return var->second;//Get the index
 }
+
+void MyBOManager::AddToAllBalls(String ballName)
+{
+	std::vector<vector3> lVertex = m_pMeshMngr->GetVertexList(ballName);
+	AddToAllBalls(lVertex, ballName);
+	SetModelMatrix(m_pMeshMngr->GetModelMatrix(ballName), ballName);
+}
+
+void MyBOManager::AddToAllBalls(std::vector<vector3> a_lVertex, String ballName)
+{
+	MyBOClass* pObject = new MyBOClass(a_lVertex);
+	if (pObject != nullptr)
+	{
+		allBalls.push_back(pObject);//Add the Object
+	}
+}
+
+void MyBOManager::AddToAllTables(String tableName)
+{
+	std::vector<vector3> lVertex = m_pMeshMngr->GetVertexList(tableName);
+	AddToAllBalls(lVertex, tableName);
+	SetModelMatrix(m_pMeshMngr->GetModelMatrix(tableName), tableName);
+}
+
+void MyBOManager::AddToAllTables(std::vector<vector3> a_lVertex, String tableName)
+{
+	MyBOClass* pObject = new MyBOClass(a_lVertex);
+	if (pObject != nullptr)
+	{
+		allTables.push_back(pObject);//Add the Object
+	}
+}
+
+std::vector<MyBOClass*> MyBOManager::GetAllBalls() { return allBalls; }
+
+std::vector<MyBOClass*> MyBOManager::GetAllTables() { return allTables; }
+
+int MyBOManager::GetNumBO() { return m_nObjectCount; }

@@ -118,7 +118,135 @@ void AppClass::ProcessKeyboard(void)
 	{
 		m_sceneRotation = quaternion();
 		m_tableRotation = quaternion();
-		m_ball1Pos = vector3();
+		for (int i = 0; i < m_numBalls; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 1; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 2; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 3; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 4; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 5; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 6; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 7; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 8; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9))
+	{
+		m_sceneRotation = quaternion();
+		m_tableRotation = quaternion();
+		for (int i = 0; i < 9; i++)
+		{
+			float xPos = 0.875f*(float)myTriMag->RowOnPascals(i + 1) - 1.0f - 1.75f*(float)myTriMag->PascalsAmountAboveRow(i + 1);
+			float yPos = 0.0f;
+			float zPos = -(float)myTriMag->RowOnPascals(i + 1);
+			m_allBallPos[i] = vector3(xPos, yPos, zPos);
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::G) && !pressTimedEvent)
+	{
+		m_GravitySux = !m_GravitySux;
+		pressTimedEvent = true;
+		timerTracker = controlTimer;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::M) && !pressTimedEvent)
+	{
+		whyWouldYouEverTurnThisOn = !whyWouldYouEverTurnThisOn;
+		pressTimedEvent = true;
+		timerTracker = controlTimer;
 	}
 
 	controlTimer++;

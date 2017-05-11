@@ -13,6 +13,8 @@ class MyBOManager
 	uint m_nObjectCount = 0; //number of AABB in the list
 	static MyBOManager* m_pInstance; // Singleton pointer
 	std::vector<MyBOClass*> m_lObject; //list of AABB
+	std::vector<MyBOClass*> allBalls;
+	std::vector<MyBOClass*> allTables;
 	MeshManagerSingleton* m_pMeshMngr = nullptr;//Mesh Manager Singleton
 	std::vector<std::vector<int>> m_llCollidingIndices; //List of list of colliding indices.
 	std::map<String, uint> m_mapIndex;//Map relating the mesh and the index
@@ -153,6 +155,22 @@ public:
 	ARGUMENTS: ---
 	OUTPUT: ---
 	*/
+
+	void AddToAllBalls(std::vector<vector3> a_lVertex, String ballName);
+	void AddToAllBalls(String a_sName);
+	void AddToAllTables(std::vector<vector3> a_lVertex, String tableName);
+	void AddToAllTables (String a_sName);
+
+	//void SetObjectModelMatrices();
+
+	int GetNumBO();
+
+	//returns all the ball BO
+	std::vector<MyBOClass*> GetAllBalls();
+
+	//returns all the table BO
+	std::vector<MyBOClass*> GetAllTables();
+
 	void Update(void);
 
 private:

@@ -13,27 +13,48 @@ Date: 2015/09 (Last Modified on: 15/11)
 #include "BoundingObjectManager.h"
 #include "MyBOManager.h"
 #include "PhysicsManager.h"
+#include "TriangleMagic.h"
+#include "Octree.h"
 
 using namespace ReEng; //Using ReEng namespace to use all the classes in the dll
 
 class AppClass : public ReEngAppClass
 {
-	//vector3 m_v3Position;
 	quaternion m_sceneRotation = quaternion();
 	quaternion m_tableRotation = quaternion();
-	vector3 m_ball1Pos = vector3();
-	//BoundingObjectManager* m_boMngr;
+	//vector3 m_ball1Pos = vector3();
 	bool m_backgroundOn = false;
 	int controlTimer = 0;
 	int timerTracker = 0;
 	bool m_seeControls = true;
 	bool pressTimedEvent = false;
+	bool m_GravitySux = false;
+	bool whyWouldYouEverTurnThisOn = false;
+	Octree* myOctree;
 	MyBOManager* m_pBOMngr;
-	bool m_shouldFall = true;
+	std::vector<bool> m_shouldFall;
 	vector3 m_v3O1;
 	vector3 m_v3O2;
-	BallPhysics* m_ball1Phys;
+	int m_numTables;
+	int m_numBalls;
+	std::vector<vector3> m_allBallPos;
+	std::vector<vector3> m_allTablePos;
+	std::vector<quaternion> m_allBallRot;
+	std::vector<quaternion> m_allTableRot;
+	std::vector<String> m_ballNames;
+	std::vector<String> m_tableNames;
+	std::vector<matrix4> allMatrices;
+	std::vector<MyBOClass*> allBO;
+	float m_ballForce;
+	float m_tableForce;
+	TriangleMagic* myTriMag;
+	//all the balls and tables in the scene
+	
+	//BallPhysics* m_ball1Phys;
+	PhysicsManager* m_pPhysicsMngr;
+
 public:
+
 	typedef ReEngAppClass super;
 	/*
 	USAGE: Constructor
